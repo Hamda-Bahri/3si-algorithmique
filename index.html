@@ -3,33 +3,366 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>3 SI - Algorithmique et Programmation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #243447;
+            line-height: 1.6;
+        }
+
+        /* Barre supérieure */
+        header {
+            background: #163b65;
+            color: white;
+            padding: 18px 7%;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.45rem;
+        }
+
+        .logo p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Partie principale */
+        .hero {
+            background: linear-gradient(135deg, #eaf3ff, #f7fbff);
+            padding: 75px 7%;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #d9eaff;
+            color: #164a7b;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            color: #163b65;
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 750px;
+            font-size: 1.08rem;
+            color: #526579;
+        }
+
+        /* Contenu */
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 55px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            color: #163b65;
+            font-size: 1.8rem;
+        }
+
+        .section-title p {
+            color: #68798b;
+            margin-top: 5px;
+        }
+
+        /* Cartes */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            border-top: 5px solid #3478b8;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.11);
+        }
+
+        .card h3 {
+            color: #163b65;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #607080;
+            margin-bottom: 18px;
+        }
+
+        .card a {
+            display: inline-block;
+            text-decoration: none;
+            background: #2469a2;
+            color: white;
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .card a:hover {
+            background: #174e7c;
+        }
+
+        /* Chapitre disponible */
+        .available {
+            margin-top: 55px;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            border-left: 6px solid #2d8a68;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .available h2 {
+            color: #205d49;
+            margin-bottom: 8px;
+        }
+
+        .available h3 {
+            color: #163b65;
+            margin: 18px 0 8px;
+        }
+
+        .tags {
+            margin: 15px 0 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eef4fa;
+            color: #315a7d;
+            padding: 5px 11px;
+            margin: 4px;
+            border-radius: 15px;
+            font-size: 0.82rem;
+        }
+
+        .course-button {
+            display: inline-block;
+            background: #2d8a68;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+
+        /* Pied de page */
+        footer {
+            margin-top: 50px;
+            background: #163b65;
+            color: #dce8f4;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.85rem;
+        }
+
+        /* Téléphone */
+        @media (max-width: 750px) {
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                margin-top: 12px;
+            }
+
+            nav a {
+                margin: 0 15px 0 0;
+            }
+
+            .hero {
+                padding: 50px 25px;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>3 SI - Algorithmique et Programmation</h1>
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <h1>3 SI</h1>
+            <p>Algorithmique & Programmation</p>
+        </div>
 
-    <h2>Cours et activités</h2>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="#ressources">Cours</a>
+            <a href="#ressources">Exercices</a>
+            <a href="#ressources">TP Python</a>
+        </nav>
+    </div>
+</header>
 
-    <p>
-        Bienvenue dans l'espace pédagogique destiné aux élèves
-        de 3ème année Sciences de l'Informatique.
-    </p>
 
-    <h3>Chapitre : Les structures de contrôle itératives</h3>
+<section class="hero">
+    <div class="hero-content">
 
-    <p>
-        Nous étudierons :
-    </p>
+        <span class="badge">
+            3ème année Sciences de l'Informatique
+        </span>
 
-    <ul>
-        <li>La boucle Pour</li>
-        <li>La boucle Répéter...Jusqu'à</li>
-        <li>La boucle Tant que</li>
-        <li>Comment choisir la bonne boucle ?</li>
-        <li>Les erreurs fréquentes</li>
-    </ul>
+        <h2>Algorithmique & Programmation</h2>
+
+        <p>
+            Espace pédagogique destiné aux élèves de 3ème année
+            Sciences de l'Informatique. Retrouvez les cours,
+            les exercices, les activités et les travaux pratiques Python.
+        </p>
+
+    </div>
+</section>
+
+
+<main>
+
+    <section id="ressources">
+
+        <div class="section-title">
+            <h2>Ressources pédagogiques</h2>
+            <p>Choisissez le type de ressource que vous souhaitez consulter.</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Cours</h3>
+                <p>
+                    Consultez les cours d'algorithmique et de programmation,
+                    accompagnés d'exemples et d'explications.
+                </p>
+                <a href="#cours-disponible">Voir les cours</a>
+            </div>
+
+            <div class="card">
+                <h3>Exercices</h3>
+                <p>
+                    Exercices d'application et problèmes permettant
+                    de consolider les notions étudiées en classe.
+                </p>
+                <a href="#">Bientôt disponible</a>
+            </div>
+
+            <div class="card">
+                <h3>TP Python</h3>
+                <p>
+                    Activités pratiques pour passer de l'algorithme
+                    à son implémentation en Python.
+                </p>
+                <a href="#">Bientôt disponible</a>
+            </div>
+
+            <div class="card">
+                <h3>Révisions</h3>
+                <p>
+                    Fiches de synthèse, questions rapides et activités
+                    pour préparer les devoirs.
+                </p>
+                <a href="#">Bientôt disponible</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="available" id="cours-disponible">
+
+        <h2>Premier cours disponible</h2>
+
+        <h3>Les structures de contrôle itératives</h3>
+
+        <p>
+            Comprendre comment répéter un traitement et choisir
+            la structure itérative adaptée à une situation.
+        </p>
+
+        <div class="tags">
+            <span class="tag">Pour</span>
+            <span class="tag">Répéter...Jusqu'à</span>
+            <span class="tag">Tant que</span>
+            <span class="tag">Choix de la boucle</span>
+            <span class="tag">Erreurs fréquentes</span>
+        </div>
+
+        <!-- Le lien fonctionnera lorsque nous créerons le cours -->
+        <a class="course-button"
+           href="cours/structures-iteratives.html">
+            Accéder au cours
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+    3 SI — Algorithmique & Programmation
+</footer>
 
 </body>
 </html>

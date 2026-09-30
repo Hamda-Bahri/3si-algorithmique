@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Structures de contrôle itératives - 3 SI</title>
+
+<style>
+
+/* =========================================================
+   BASE
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #263746;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   EN-TÊTE
+========================================================= */
+
+header {
+    background: #163b65;
+    color: white;
+    padding: 16px 6%;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.35rem;
+}
+
+.logo p {
+    font-size: .82rem;
+    opacity: .85;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.teacher {
+    font-size: .85rem;
+    color: #dce8f4;
+    margin-bottom: 5px;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: .9rem;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   TITRE DU COURS
+========================================================= */
+
+.hero {
+    background: linear-gradient(135deg, #e6f1ff, #f9fcff);
+    padding: 55px 25px;
+}
+
+.hero-inner {
+    max-width: 1050px;
+    margin: auto;
+}
+
+.badge {
+    display: inline-block;
+    background: #d5e9ff;
+    color: #174d7c;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: .82rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    color: #163b65;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    max-width: 800px;
+    color: #53687a;
+}
+
+/* =========================================================
+   SOMMAIRE
+========================================================= */
+
+.toc {
+    max-width: 1050px;
+    margin: 30px auto 0;
+    padding: 0 25px;
+}
+
+.toc-box {
+    background: white;
+    padding: 22px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.07);
+}
+
+.toc h3 {
+    color: #163b65;
+    margin-bottom: 12px;
+}
+
+.toc-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.toc a {
+    text-decoration: none;
+    background: #edf4fb;
+    color: #24577e;
+    padding: 6px 11px;
+    border-radius: 15px;
+    font-size: .84rem;
+}
+
+.toc a:hover {
+    background: #dbeaf8;
+}
+
+/* =========================================================
+   CONTENU
+========================================================= */
+
+main {
+    max-width: 1050px;
+    margin: auto;
+    padding: 35px 25px 70px;
+}
+
+.course-section {
+    background: white;
+    margin-bottom: 28px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 13px rgba(0,0,0,.06);
+}
+
+.course-section h2 {
+    color: #163b65;
+    margin-bottom: 17px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e6edf4;
+}
+
+.course-section h3 {
+    color: #245f91;
+    margin: 22px 0 9px;
+}
+
+.course-section p {
+    margin-bottom: 12px;
+}
+
+/* =========================================================
+   ENCADRÉS
+========================================================= */
+
+.remember {
+    background: #edf7f3;
+    border-left: 5px solid #31866a;
+    padding: 16px 18px;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+
+.remember strong {
+    color: #24664f;
+}
+
+.info {
+    background: #eef6ff;
+    border-left: 5px solid #3478b8;
+    padding: 16px 18px;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+
+.warning {
+    background: #fff7e7;
+    border-left: 5px solid #e1a327;
+    padding: 16px 18px;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+
+.error {
+    background: #fff0f0;
+    border-left: 5px solid #c95858;
+    padding: 16px 18px;
+    margin: 18px 0;
+    border-radius: 6px;
+}
+
+/* =========================================================
+   CODE
+========================================================= */
+
+.code-title {
+    font-size: .82rem;
+    font-weight: bold;
+    color: #557086;
+    margin-bottom: 5px;
+}
+
+pre {
+    background: #17212b;
+    color: #f1f5f8;
+    padding: 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    line-height: 1.55;
+    margin: 8px 0 18px;
+}
+
+code {
+    font-family: Consolas, "Courier New", monospace;
+}
+
+.two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 15px;
+}
+
+/* =========================================================
+   TABLEAUX
+========================================================= */
+
+.table-container {
+    overflow-x: auto;
+    margin: 18px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th {
+    background: #163b65;
+    color: white;
+    padding: 11px;
+}
+
+td {
+    border: 1px solid #d9e1e8;
+    padding: 11px;
+}
+
+tr:nth-child(even) {
+    background: #f6f9fc;
+}
+
+/* =========================================================
+   SCHÉMA DE CHOIX
+========================================================= */
+
+.choice-diagram {
+    text-align: center;
+    margin: 25px auto;
+    max-width: 720px;
+}
+
+.choice-box {
+    background: #eaf3fc;
+    border: 2px solid #3478b8;
+    border-radius: 9px;
+    padding: 13px;
+    margin: 8px auto;
+    font-weight: bold;
+}
+
+.choice-arrow {
+    color: #557086;
+    font-size: 1.4rem;
+}
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+.quiz {
+    background: #f8fbfe;
+    border: 1px solid #d8e5ef;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 22px 0;
+}
+
+.quiz h3 {
+    margin-top: 0;
+}
+
+.quiz button {
+    background: white;
+    border: 1px solid #3478b8;
+    color: #24577e;
+    padding: 9px 15px;
+    border-radius: 6px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: .9rem;
+}
+
+.quiz button:hover {
+    background: #e9f3fc;
+}
+
+.feedback {
+    display: none;
+    margin-top: 12px;
+    padding: 11px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.correct {
+    background: #e8f6ef;
+    color: #24664f;
+}
+
+.incorrect {
+    background: #fff0f0;
+    color: #a44242;
+}
+
+/* =========================================================
+   BOUTON CORRECTION
+========================================================= */
+
+.answer-button {
+    background: #2469a2;
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.answer {
+    display: none;
+    background: #edf7f3;
+    border-left: 4px solid #31866a;
+    margin-top: 12px;
+    padding: 13px;
+}
+
+/* =========================================================
+   PIED DE PAGE
+========================================================= */
+
+footer {
+    background: #163b65;
+    color: #dce8f4;
+    text-align: center;
+    padding: 25px;
+    font-size: .85rem;
+}
+
+/* =========================================================
+   TÉLÉPHONE
+========================================================= */
+
+@media(max-width: 750px) {
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-right {
+        text-align: left;
+        margin-top: 10px;
+    }
+
+    .hero h2 {
+        font-size: 1.7rem;
+    }
+
+    .two-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .course-section {
+        padding: 21px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- =========================================================
+     EN-TÊTE
+========================================================= -->
+
+<header>
+
+<div class="header-content">
+
+    <div class="logo">
+        <h1>3 SI</h1>
+        <p>Algorithmique & Programmation</p>
+    </div>
+
+    <div class="header-right">
+        <div class="teacher">
+            Professeur : <strong>Hamda Elbahri</strong>
+        </div>
+
+        <a href="../index.html">
+            ← Retour à l'accueil
+        </a>
+    </div>
+
+</div>
+
+</header>
+
+
+<!-- =========================================================
+     TITRE
+========================================================= -->
+
+<section class="hero">
+
+<div class="hero-inner">
+
+    <span class="badge">
+        Cours d'algorithmique
+    </span>
+
+    <h2>
+        Les structures de contrôle itératives
+    </h2>
+
+    <p>
+        Une structure itérative permet de répéter une ou plusieurs
+        instructions. Dans ce cours, nous étudierons les structures
+        <strong>Pour</strong>, <strong>Répéter...Jusqu'à</strong>
+        et <strong>Tant que</strong>, ainsi que les critères permettant
+        de choisir la structure adaptée à une situation.
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     SOMMAIRE
+========================================================= -->
+
+<div class="toc">
+
+<div class="toc-box">
+
+    <h3>Sommaire</h3>
+
+    <div class="toc-links">
+
+        <a href="#notion">1. Notion d'itération</a>
+        <a href="#pour">2. Pour</a>
+        <a href="#repeter">3. Répéter...Jusqu'à</a>
+        <a href="#tantque">4. Tant que</a>
+        <a href="#comparaison">5. Comparaison</a>
+        <a href="#choisir">6. Choisir la boucle</a>
+        <a href="#erreurs">7. Erreurs fréquentes</a>
+        <a href="#verification">8. Vérification</a>
+        <a href="#quiz">9. Testez-vous</a>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<main>
+
+<!-- =========================================================
+     1 - NOTION D'ITÉRATION
+========================================================= -->
+
+<section class="course-section" id="notion">
+
+<h2>1. Notion d'itération</h2>
+
+<p>
+Une <strong>itération</strong> correspond à une répétition
+d'un traitement.
+</p>
+
+<p>
+En algorithmique, certaines situations nécessitent d'exécuter
+plusieurs fois la même instruction ou le même ensemble
+d'instructions.
+</p>
+
+<p>Par exemple :</p>
+
+<ul style="margin-left:25px; margin-bottom:18px;">
+    <li>afficher les entiers de 1 à 10 ;</li>
+    <li>saisir les notes de 20 élèves ;</li>
+    <li>demander une valeur jusqu'à ce qu'elle soit valide ;</li>
+    <li>traiter successivement les chiffres d'un entier ;</li>
+    <li>chercher un diviseur d'un nombre.</li>
+</ul>
+
+<div class="remember">
+
+<strong>Question essentielle :</strong><br>
+
+Avant de choisir une boucle, demandons-nous :
+
+<strong>
+« Connaît-on le nombre d'itérations avant de commencer ? »
+</strong>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     2 - POUR
+========================================================= -->
+
+<section class="course-section" id="pour">
+
+<h2>2. La structure Pour</h2>
+
+<p>
+La structure <strong>Pour</strong> est utilisée lorsque
+le nombre d'itérations est <strong>connu à l'avance</strong>.
+</p>
+
+<h3>Syntaxe algorithmique</h3>
+
+<pre><code>Pour compteur de valeur_initiale à valeur_finale Faire
+    Traitement
+Fin Pour</code></pre>
+
+<h3>Exemple 1 : afficher les entiers de 1 à 5</h3>
+
+<div class="two-columns">
+
+<div>
+
+<div class="code-title">Algorithme</div>
+
+<pre><code>Pour i de 1 à 5 Faire
+    Ecrire(i)
+Fin Pour</code></pre>
+
+</div>
+
+<div>
+
+<div class="code-title">Python</div>
+
+<pre><code>for i in range(1, 6):
+    print(i)</code></pre>
+
+</div>
+
+</div>
+
+<div class="info">
+
+En Python, la borne supérieure de <code>range</code>
+n'est pas incluse.
+
+Ainsi :
+
+<code>range(1, 6)</code>
+
+produit les valeurs :
+
+<strong>1, 2, 3, 4 et 5.</strong>
+
+</div>
+
+<h3>Exemple 2 : calculer la moyenne de N notes</h3>
+
+<p>
+Une fois la valeur de <strong>N</strong> connue,
+nous savons exactement combien de notes doivent être saisies.
+La structure <strong>Pour</strong> est donc adaptée.
+</p>
+
+<div class="two-columns">
+
+<div>
+
+<div class="code-title">Algorithme</div>
+
+<pre><code>S ← 0
+
+Pour i de 1 à N Faire
+    Ecrire("Donner la note ", i)
+    Lire(note)
+    S ← S + note
+Fin Pour
+
+moy ← S / N</code></pre>
+
+</div>
+
+<div>
+
+<div class="code-title">Python</div>
+
+<pre><code>s = 0
+
+for i in range(1, n + 1):
+    note = float(input("Donner une note : "))
+    s = s + note
+
+moy = s / n</code></pre>
+
+</div>
+
+</div>
+
+<div class="remember">
+
+<strong>À retenir :</strong>
+si le nombre de répétitions est connu avant l'entrée dans
+la boucle, on privilégie <strong>Pour</strong>.
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     3 - REPETER
+========================================================= -->
+
+<section class="course-section" id="repeter">
+
+<h2>3. La structure Répéter...Jusqu'à</h2>
+
+<p>
+La structure <strong>Répéter...Jusqu'à</strong> est utilisée
+lorsque le nombre d'itérations n'est pas connu à l'avance
+et que le traitement doit être effectué
+<strong>avant le test</strong>.
+</p>
+
+<h3>Syntaxe</h3>
+
+<pre><code>Répéter
+    Traitement
+Jusqu'à condition</code></pre>
+
+<div class="remember">
+
+Le traitement est exécuté
+<strong>au moins une fois</strong>.
+
+La boucle s'arrête lorsque la condition devient
+<strong>vraie</strong>.
+
+</div>
+
+<h3>Exemple : saisie d'une note valide</h3>
+
+<p>
+On veut saisir une note comprise entre 0 et 20.
+Nous ne savons pas combien de tentatives seront nécessaires.
+</p>
+
+<pre><code>Répéter
+    Ecrire("Donner une note : ")
+    Lire(note)
+Jusqu'à note >= 0 et note <= 20</code></pre>
+
+<p>
+La saisie doit être réalisée une première fois avant de pouvoir
+vérifier si la note est correcte.
+</p>
+
+<div class="info">
+
+<strong>Important :</strong>
+Python ne possède pas directement une instruction
+<code>Répéter...Jusqu'à</code>.
+
+Nous étudions donc cette structure principalement
+dans la partie algorithmique.
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     4 - TANT QUE
+========================================================= -->
+
+<section class="course-section" id="tantque">
+
+<h2>4. La structure Tant que</h2>
+
+<p>
+La structure <strong>Tant que</strong> est utilisée lorsque
+le nombre d'itérations n'est pas connu à l'avance et que
+la condition doit être testée
+<strong>avant le traitement</strong>.
+</p>
+
+<h3>Syntaxe</h3>
+
+<pre><code>Tant que condition Faire
+    Traitement
+Fin Tant que</code></pre>
+
+<div class="remember">
+
+Avec <strong>Tant que</strong>, la condition est testée
+avant le traitement.
+
+Le traitement peut donc être exécuté
+<strong>zéro fois</strong>.
+
+</div>
+
+<h3>Exemple : déterminer le plus grand facteur premier</h3>
+
+<p>
+Considérons la fonction utilisée pour chercher
+le plus grand facteur premier d'un entier
+<strong>N &gt; 1</strong>.
+</p>
+
+<div class="code-title">Python</div>
+
+<pre><code>def PlusGrandFacteur(N):
+    f = 2
+
+    while N != 1:
+        if N % f == 0:
+            N = N // f
+        else:
+            f = f + 1
+
+    return f</code></pre>
+
+<p>
+Nous ne savons pas à l'avance combien de divisions ou
+de changements de la valeur de <code>f</code> seront nécessaires.
+La structure <strong>Tant que</strong> est donc adaptée.
+</p>
+
+</section>
+
+
+<!-- =========================================================
+     5 - COMPARAISON
+========================================================= -->
+
+<section class="course-section" id="comparaison">
+
+<h2>5. Différence entre Répéter et Tant que</h2>
+
+<div class="table-container">
+
+<table>
+
+<tr>
+    <th>Structure</th>
+    <th>Moment du test</th>
+    <th>Nombre minimum d'exécutions</th>
+</tr>
+
+<tr>
+    <td><strong>Répéter...Jusqu'à</strong></td>
+    <td>Après le traitement</td>
+    <td>1</td>
+</tr>
+
+<tr>
+    <td><strong>Tant que</strong></td>
+    <td>Avant le traitement</td>
+    <td>0</td>
+</tr>
+
+</table>
+
+</div>
+
+<h3>Exemple</h3>
+
+<p>Supposons que <strong>x = 15</strong>.</p>
+
+<div class="two-columns">
+
+<div>
+
+<div class="code-title">Répéter...Jusqu'à</div>
+
+<pre><code>x ← 15
+
+Répéter
+    x ← x + 1
+Jusqu'à x > 10</code></pre>
+
+<p>
+Le traitement est effectué avant le test.
+Ainsi, <strong>x devient 16</strong>.
+</p>
+
+</div>
+
+<div>
+
+<div class="code-title">Tant que</div>
+
+<pre><code>x ← 15
+
+Tant que x <= 10 Faire
+    x ← x + 1
+Fin Tant que</code></pre>
+
+<p>
+La condition est fausse dès le départ.
+Le traitement n'est jamais exécuté.
+<strong>x reste égal à 15.</strong>
+</p>
+
+</div>
+
+</div>
+
+<div class="warning">
+
+<strong>Attention aux conditions :</strong><br>
+
+Avec <strong>Répéter...Jusqu'à</strong>, on exprime généralement
+la <strong>condition d'arrêt</strong>.
+
+Avec <strong>Tant que</strong>, on exprime
+la <strong>condition de continuation</strong>.
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     6 - CHOISIR
+========================================================= -->
+
+<section class="course-section" id="choisir">
+
+<h2>6. Comment choisir la bonne boucle ?</h2>
+
+<p>
+Le choix d'une structure itérative doit être effectué
+en analysant le problème.
+</p>
+
+<div class="choice-diagram">
+
+<div class="choice-box">
+Le nombre d'itérations est-il connu à l'avance ?
+</div>
+
+<div class="choice-arrow">↓</div>
+
+<div class="choice-box">
+OUI → POUR
+</div>
+
+<div class="choice-arrow">↓</div>
+
+<div class="choice-box">
+NON → Faut-il effectuer le traitement avant le test ?
+</div>
+
+<div class="choice-arrow">↓</div>
+
+<div class="choice-box">
+OUI → RÉPÉTER...JUSQU'À
+&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+NON → TANT QUE
+</div>
+
+</div>
+
+
+<div class="table-container">
+
+<table>
+
+<tr>
+<th>Situation</th>
+<th>Structure</th>
+<th>Pourquoi ?</th>
+</tr>
+
+<tr>
+<td>Afficher les entiers de 1 à 20</td>
+<td>Pour</td>
+<td>Le nombre d'itérations est connu.</td>
+</tr>
+
+<tr>
+<td>Saisir 10 notes</td>
+<td>Pour</td>
+<td>Exactement 10 saisies.</td>
+</tr>
+
+<tr>
+<td>Saisir un entier strictement positif</td>
+<td>Répéter</td>
+<td>Il faut effectuer une première saisie.</td>
+</tr>
+
+<tr>
+<td>Supprimer successivement les chiffres de N</td>
+<td>Tant que</td>
+<td>Le nombre d'itérations dépend de N.</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="remember">
+
+<strong>Réflexe à acquérir :</strong><br><br>
+
+<strong>Pour :</strong>
+je sais combien de fois je répète.<br>
+
+<strong>Répéter...Jusqu'à :</strong>
+je traite d'abord, puis je teste.<br>
+
+<strong>Tant que :</strong>
+je teste d'abord, puis je traite.
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     7 - ERREURS
+========================================================= -->
+
+<section class="course-section" id="erreurs">
+
+<h2>7. Erreurs fréquentes</h2>
+
+<h3>Erreur 1 — Créer une boucle infinie</h3>
+
+<div class="error">
+
+<pre><code>i ← 1
+
+Tant que i <= 10 Faire
+    Ecrire(i)
+Fin Tant que</code></pre>
+
+<p>
+La valeur de <code>i</code> ne change jamais.
+La condition reste donc toujours vraie.
+</p>
+
+</div>
+
+<p>Correction :</p>
+
+<pre><code>i ← 1
+
+Tant que i <= 10 Faire
+    Ecrire(i)
+    i ← i + 1
+Fin Tant que</code></pre>
+
+
+<h3>Erreur 2 — Faire évoluer la variable dans le mauvais sens</h3>
+
+<div class="error">
+
+<pre><code>i ← 1
+
+Tant que i <= 10 Faire
+    Ecrire(i)
+    i ← i - 1
+Fin Tant que</code></pre>
+
+</div>
+
+<p>
+La valeur devient 1, 0, -1, -2...
+La condition <code>i <= 10</code> reste vraie.
+</p>
+
+<div class="remember">
+
+Posez-vous la question :
+
+<strong>
+« La modification de ma variable me rapproche-t-elle
+de la condition d'arrêt ? »
+</strong>
+
+</div>
+
+
+<h3>Erreur 3 — Mal formuler une condition</h3>
+
+<p>
+Pour accepter une note comprise entre 0 et 20 :
+</p>
+
+<pre><code>note >= 0 et note <= 20</code></pre>
+
+<p>et non :</p>
+
+<div class="error">
+
+<pre><code>note >= 0 ou note <= 20</code></pre>
+
+<p>
+Par exemple, pour <code>note = 25</code>,
+la première proposition est vraie.
+La condition utilisant <strong>ou</strong>
+devient donc vraie alors que la note est incorrecte.
+</p>
+
+</div>
+
+
+<h3>Erreur 4 — Confondre arrêt et continuation</h3>
+
+<p>Avec Répéter :</p>
+
+<pre><code>Jusqu'à note >= 0 et note <= 20</code></pre>
+
+<p>Avec Tant que :</p>
+
+<pre><code>Tant que note < 0 ou note > 20 Faire</code></pre>
+
+<div class="info">
+
+Ces deux conditions sont opposées.
+
+La négation de :
+
+<code>note >= 0 et note <= 20</code>
+
+est :
+
+<code>note < 0 ou note > 20</code>.
+
+</div>
+
+
+<h3>Erreur 5 — Tester une variable non initialisée</h3>
+
+<div class="error">
+
+<pre><code>Tant que note < 0 ou note > 20 Faire
+    Lire(note)
+Fin Tant que</code></pre>
+
+<p>
+Au premier test, <code>note</code> n'a encore reçu aucune valeur.
+</p>
+
+</div>
+
+<p>Une solution correcte est :</p>
+
+<pre><code>Lire(note)
+
+Tant que note < 0 ou note > 20 Faire
+    Lire(note)
+Fin Tant que</code></pre>
+
+
+<h3>Erreur 6 — Confondre &lt; et &lt;=</h3>
+
+<p>
+Pour afficher les entiers de 1 à 10 :
+</p>
+
+<pre><code>Tant que i <= 10 Faire</code></pre>
+
+<p>
+Si nous utilisons <code>i < 10</code>,
+la valeur 10 ne sera pas traitée.
+</p>
+
+
+<h3>Erreur 7 — Modifier manuellement le compteur d'un Pour</h3>
+
+<div class="error">
+
+<pre><code>Pour i de 1 à 10 Faire
+    Ecrire(i)
+    i ← i + 1
+Fin Pour</code></pre>
+
+</div>
+
+<p>
+Dans une structure <strong>Pour</strong>,
+l'évolution du compteur est gérée par la boucle.
+</p>
+
+
+<h3>Erreur 8 — Utiliser Pour quand le nombre est inconnu</h3>
+
+<p>
+Il ne faut pas choisir arbitrairement un grand nombre
+d'itérations pour simuler une boucle dont le nombre
+d'exécutions est inconnu.
+</p>
+
+<p>
+Dans ce cas, on étudie plutôt l'utilisation de
+<strong>Tant que</strong> ou de
+<strong>Répéter...Jusqu'à</strong>.
+</p>
+
+</section>
+
+
+<!-- =========================================================
+     8 - VERIFICATION
+========================================================= -->
+
+<section class="course-section" id="verification">
+
+<h2>8. Méthode de vérification</h2>
+
+<p>
+Après avoir écrit une boucle, posez-vous systématiquement
+les quatre questions suivantes :
+</p>
+
+<div class="remember">
+
+<strong>1.</strong>
+Pourquoi ai-je choisi cette boucle ?
+Le nombre d'itérations est-il connu ou inconnu ?
+<br><br>
+
+<strong>2.</strong>
+Que représente ma condition ?
+Une condition de continuation ou une condition d'arrêt ?
+<br><br>
+
+<strong>3.</strong>
+Quelle variable évolue à chaque itération ?
+<br><br>
+
+<strong>4.</strong>
+Dans quelle situation concrète la boucle s'arrête-t-elle ?
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     9 - QUIZ
+========================================================= -->
+
+<section class="course-section" id="quiz">
+
+<h2>9. Testez-vous</h2>
+
+<p>
+Choisissez la structure qui vous semble la plus adaptée.
+</p>
+
+
+<div class="quiz">
+
+<h3>
+Situation 1
+</h3>
+
+<p>
+On veut afficher les carrés des entiers de 1 à 100.
+</p>
+
+<button onclick="quiz(this, true, 'q1')">Pour</button>
+<button onclick="quiz(this, false, 'q1')">Répéter</button>
+<button onclick="quiz(this, false, 'q1')">Tant que</button>
+
+<div id="q1" class="feedback"></div>
+
+</div>
+
+
+<div class="quiz">
+
+<h3>
+Situation 2
+</h3>
+
+<p>
+On veut saisir un âge jusqu'à obtenir une valeur
+comprise entre 10 et 25.
+</p>
+
+<button onclick="quiz(this, false, 'q2')">Pour</button>
+<button onclick="quiz(this, true, 'q2')">Répéter</button>
+<button onclick="quiz(this, false, 'q2')">Tant que</button>
+
+<div id="q2" class="feedback"></div>
+
+</div>
+
+
+<div class="quiz">
+
+<h3>
+Situation 3
+</h3>
+
+<p>
+On dispose déjà d'un entier N et on veut le diviser
+successivement par 2 tant qu'il est pair.
+</p>
+
+<button onclick="quiz(this, false, 'q3')">Pour</button>
+<button onclick="quiz(this, false, 'q3')">Répéter</button>
+<button onclick="quiz(this, true, 'q3')">Tant que</button>
+
+<div id="q3" class="feedback"></div>
+
+</div>
+
+
+<div class="quiz">
+
+<h3>
+Situation 4
+</h3>
+
+<p>
+On veut calculer la somme de 30 nombres saisis.
+</p>
+
+<button onclick="quiz(this, true, 'q4')">Pour</button>
+<button onclick="quiz(this, false, 'q4')">Répéter</button>
+<button onclick="quiz(this, false, 'q4')">Tant que</button>
+
+<div id="q4" class="feedback"></div>
+
+</div>
+
+
+<div class="quiz">
+
+<h3>
+Situation 5
+</h3>
+
+<p>
+On veut saisir un mot de passe jusqu'à ce qu'il soit correct.
+</p>
+
+<button onclick="quiz(this, false, 'q5')">Pour</button>
+<button onclick="quiz(this, true, 'q5')">Répéter</button>
+<button onclick="quiz(this, false, 'q5')">Tant que</button>
+
+<div id="q5" class="feedback"></div>
+
+</div>
+
+
+<h3>Activité de réflexion</h3>
+
+<p>
+Choisissez une structure et justifiez mentalement votre réponse :
+</p>
+
+<div class="warning">
+
+<strong>Situation :</strong><br>
+
+Chercher le premier diviseur d'un entier N à partir de 2
+et arrêter la recherche dès qu'un diviseur est trouvé.
+
+<br><br>
+
+Quelle structure choisir ?
+
+<br>
+
+<button class="answer-button"
+        onclick="toggleAnswer()">
+    Afficher la correction
+</button>
+
+<div class="answer" id="answer">
+
+<strong>Réponse : Tant que.</strong><br><br>
+
+Le nombre de valeurs à tester n'est pas connu à l'avance.
+La recherche continue tant que la condition d'arrêt
+n'est pas atteinte.
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+<p>
+3 SI — Algorithmique & Programmation
+</p>
+
+<p>
+Professeur : Hamda Elbahri
+</p>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+function quiz(button, isCorrect, id) {
+
+    const feedback =
+        document.getElementById(id);
+
+    feedback.style.display = "block";
+
+    if (isCorrect) {
+
+        feedback.className =
+            "feedback correct";
+
+        feedback.innerHTML =
+            "✓ Bonne réponse. Votre choix est adapté à la situation.";
+
+    }
+
+    else {
+
+        feedback.className =
+            "feedback incorrect";
+
+        feedback.innerHTML =
+            "✗ Ce n'est pas la structure la plus adaptée. Analysez d'abord si le nombre d'itérations est connu.";
+
+    }
+
+}
+
+
+/* =========================================================
+   AFFICHER / MASQUER UNE CORRECTION
+========================================================= */
+
+function toggleAnswer() {
+
+    const answer =
+        document.getElementById("answer");
+
+    if (answer.style.display === "block") {
+
+        answer.style.display = "none";
+
+    }
+
+    else {
+
+        answer.style.display = "block";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+</html>

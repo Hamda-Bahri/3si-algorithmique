@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Applications - Structures itératives - 3 SI</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #263746;
+    line-height: 1.65;
+}
+
+/* ===================== EN-TÊTE ===================== */
+
+header {
+    background: #163b65;
+    color: white;
+    padding: 16px 6%;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.35rem;
+}
+
+.logo p {
+    font-size: .82rem;
+    opacity: .85;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.teacher {
+    font-size: .85rem;
+    color: #dce8f4;
+    margin-bottom: 5px;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: .9rem;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+/* ===================== TITRE ===================== */
+
+.hero {
+    background: linear-gradient(135deg, #e8f4ef, #f9fcfb);
+    padding: 50px 25px;
+}
+
+.hero-inner {
+    max-width: 1050px;
+    margin: auto;
+}
+
+.badge {
+    display: inline-block;
+    background: #d9eee5;
+    color: #24664f;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: .82rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    color: #163b65;
+    font-size: 2.1rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #53687a;
+    max-width: 800px;
+}
+
+/* ===================== SOMMAIRE ===================== */
+
+.toc {
+    max-width: 1050px;
+    margin: 28px auto 0;
+    padding: 0 25px;
+}
+
+.toc-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.07);
+}
+
+.toc h3 {
+    color: #163b65;
+    margin-bottom: 12px;
+}
+
+.toc-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.toc a {
+    text-decoration: none;
+    background: #edf4fb;
+    color: #24577e;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: .85rem;
+}
+
+/* ===================== CONTENU ===================== */
+
+main {
+    max-width: 1050px;
+    margin: auto;
+    padding: 35px 25px 70px;
+}
+
+.exercise {
+    background: white;
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 13px rgba(0,0,0,.06);
+}
+
+.exercise h2 {
+    color: #163b65;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e6edf4;
+}
+
+.exercise h3 {
+    color: #245f91;
+    margin: 22px 0 10px;
+}
+
+.instruction {
+    background: #eef6ff;
+    border-left: 5px solid #3478b8;
+    padding: 15px 18px;
+    margin: 16px 0 22px;
+    border-radius: 6px;
+}
+
+.note {
+    background: #fff8e8;
+    border-left: 5px solid #e0a62e;
+    padding: 14px 17px;
+    margin: 18px 0;
+    border-radius: 6px;
+}
+
+/* ===================== CODE ===================== */
+
+pre {
+    background: #17212b;
+    color: #f1f5f8;
+    padding: 17px;
+    border-radius: 8px;
+    overflow-x: auto;
+    line-height: 1.55;
+    margin: 10px 0;
+}
+
+code {
+    font-family: Consolas, "Courier New", monospace;
+}
+
+/* ===================== TABLEAUX ===================== */
+
+.table-container {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #163b65;
+    color: white;
+    padding: 11px;
+    text-align: left;
+}
+
+td {
+    border: 1px solid #d7e0e8;
+    padding: 12px;
+    vertical-align: top;
+}
+
+tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+/* ===================== ZONES DE RÉPONSE ===================== */
+
+.answer-area {
+    width: 100%;
+    min-height: 85px;
+    border: 2px dashed #b8c7d4;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 10px;
+    background: #fbfdff;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+}
+
+.short-answer {
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #b8c7d4;
+    border-radius: 6px;
+    margin-top: 7px;
+}
+
+/* ===================== QCM ===================== */
+
+.question {
+    background: #f8fbfe;
+    border: 1px solid #d8e5ef;
+    border-radius: 9px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.question-number {
+    font-weight: bold;
+    color: #163b65;
+    margin-bottom: 12px;
+}
+
+.options label {
+    display: block;
+    padding: 8px 10px;
+    margin: 6px 0;
+    background: white;
+    border: 1px solid #d8e2ea;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.options label:hover {
+    background: #edf5fb;
+}
+
+.options input {
+    margin-right: 9px;
+}
+
+/* ===================== PROPOSITIONS V/F ===================== */
+
+.proposition {
+    background: #f8fbfe;
+    border: 1px solid #d8e5ef;
+    padding: 18px;
+    margin: 16px 0;
+    border-radius: 9px;
+}
+
+.vf {
+    margin-top: 12px;
+}
+
+.vf label {
+    margin-right: 22px;
+    font-weight: bold;
+}
+
+/* ===================== NOMBRE HEUREUX ===================== */
+
+.definition {
+    background: #edf7f3;
+    border-left: 5px solid #31866a;
+    padding: 17px;
+    margin: 18px 0;
+    border-radius: 6px;
+}
+
+.examples {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 20px 0;
+}
+
+.example {
+    background: #f7f9fb;
+    border: 1px solid #dbe3ea;
+    padding: 18px;
+    border-radius: 8px;
+}
+
+/* ===================== FOOTER ===================== */
+
+footer {
+    background: #163b65;
+    color: #dce8f4;
+    text-align: center;
+    padding: 25px;
+    font-size: .85rem;
+}
+
+/* ===================== MOBILE ===================== */
+
+@media(max-width: 750px) {
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-right {
+        text-align: left;
+        margin-top: 10px;
+    }
+
+    .hero h2 {
+        font-size: 1.7rem;
+    }
+
+    .examples {
+        grid-template-columns: 1fr;
+    }
+
+    .exercise {
+        padding: 20px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<header>
+
+<div class="header-content">
+
+    <div class="logo">
+        <h1>3 SI</h1>
+        <p>Algorithmique & Programmation</p>
+    </div>
+
+    <div class="header-right">
+
+        <div class="teacher">
+            Professeur : <strong>Hamda Elbahri</strong>
+        </div>
+
+        <a href="../index.html">
+            ← Retour à l'accueil
+        </a>
+
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+
+        <a href="../cours/structures-iteratives.html">
+            Revoir le cours
+        </a>
+
+    </div>
+
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<div class="hero-inner">
+
+    <span class="badge">
+        Série d'applications
+    </span>
+
+    <h2>
+        Les structures de contrôle itératives
+    </h2>
+
+    <p>
+        Applications destinées à consolider les notions étudiées
+        dans le cours sur les structures Pour,
+        Répéter...Jusqu'à et Tant que.
+    </p>
+
+</div>
+
+</section>
+
+
+<div class="toc">
+
+<div class="toc-box">
+
+    <h3>Les exercices</h3>
+
+    <div class="toc-links">
+        <a href="#ex1">Exercice 1 — Exécution manuelle</a>
+        <a href="#ex2">Exercice 2 — Recherche d'erreurs</a>
+        <a href="#ex3">Exercice 3 — QCM</a>
+        <a href="#ex4">Exercice 4 — Nombre heureux</a>
+    </div>
+
+</div>
+
+</div>
+
+
+<main>
+
+<!-- =====================================================
+     EXERCICE 1
+===================================================== -->
+
+<section class="exercise" id="ex1">
+
+<h2>Exercice N°1 — Exécution manuelle</h2>
+
+<div class="instruction">
+Pour chacun des traitements ci-dessous, compléter le tableau
+par son <strong>exécution manuelle</strong> et
+l'<strong>instruction simple correspondante</strong>.
+</div>
+
+
+<h3>Traitement 1</h3>
+
+<pre><code>Res ← 0
+
+Pour i de 1 à b Faire
+    Res ← Res + a
+Fin Pour</code></pre>
+
+<p><strong>Pour a = 4 et b = 5</strong></p>
+
+<label>Exécution manuelle :</label>
+<textarea class="answer-area"></textarea>
+
+<label>Instruction simple correspondante :</label>
+<input class="short-answer" type="text">
+
+
+<h3>Traitement 2</h3>
+
+<pre><code>Res ← 0
+
+Tant que a ≠ 0 Faire
+    Res ← Res + 1
+    a ← a div 10
+Fin Tant que</code></pre>
+
+<p><strong>Pour a = 1257</strong></p>
+
+<label>Exécution manuelle :</label>
+<textarea class="answer-area"></textarea>
+
+<label>Instruction simple correspondante :</label>
+<input class="short-answer" type="text">
+
+
+<h3>Traitement 3</h3>
+
+<pre><code>Res ← ""
+
+Pour i de p1 à p2 Faire
+    Res ← Res + ch[i]
+Fin Pour</code></pre>
+
+<p>
+<strong>
+ch = "informatique", p1 = 2 et p2 = 7
+</strong>
+</p>
+
+<label>Exécution manuelle :</label>
+<textarea class="answer-area"></textarea>
+
+<label>Instruction simple correspondante :</label>
+<input class="short-answer" type="text">
+
+
+<h3>Traitement 4</h3>
+
+<pre><code>i ← 0
+Res ← -1
+
+Tant que ch[i] ≠ c et i &lt; long(ch) Faire
+    i ← i + 1
+Fin Tant que
+
+Si ch[i] = c Alors
+    Res ← i
+Fin Si</code></pre>
+
+<p>
+<strong>Pour ch = "lettre" et c = "r"</strong>
+</p>
+
+<label>Exécution manuelle :</label>
+<textarea class="answer-area"></textarea>
+
+<label>Instruction simple correspondante :</label>
+<input class="short-answer" type="text">
+
+</section>
+
+
+<!-- =====================================================
+     EXERCICE 2
+===================================================== -->
+
+<section class="exercise" id="ex2">
+
+<h2>Exercice N°2 — Identifier les erreurs</h2>
+
+<div class="instruction">
+Les séquences algorithmiques suivantes ont été proposées
+par un élève et contiennent des erreurs.
+Identifier l'erreur dans chaque séquence.
+</div>
+
+
+<h3>Activité 1</h3>
+
+<p>
+Écrire une séquence algorithmique permettant d'afficher
+la séquence des entiers :
+<strong>2, 4, 6, 8, 10</strong>.
+</p>
+
+<pre><code>i ← 1
+
+Répéter
+    Ecrire(i)
+    i ← i + 2
+Jusqu'à i &gt; 10</code></pre>
+
+<label>Erreur(s) identifiée(s) :</label>
+<textarea class="answer-area"></textarea>
+
+
+<h3>Activité 2</h3>
+
+<p>
+Écrire un module permettant d'initialiser
+un tableau T de taille N par des zéros.
+</p>
+
+<pre><code>Fonction init(n : entier) : tab
+
+Début
+
+    Pour i de 0 à n - 1 Faire
+        T[i] ← 0
+    Fin Pour
+
+    Retourner T
+
+Fin</code></pre>
+
+<label>Erreur(s) identifiée(s) :</label>
+<textarea class="answer-area"></textarea>
+
+
+<h3>Activité 3</h3>
+
+<p>
+Écrire une séquence algorithmique permettant de calculer
+la somme des 10 premiers entiers positifs.
+</p>
+
+<pre><code>S ← 0
+
+Pour i de 1 à i = 10 Faire
+    S ← S + i
+Fin Pour</code></pre>
+
+<label>Erreur(s) identifiée(s) :</label>
+<textarea class="answer-area"></textarea>
+
+</section>
+
+
+<!-- =====================================================
+     EXERCICE 3
+===================================================== -->
+
+<section class="exercise" id="ex3">
+
+<h2>Exercice N°3 — QCM</h2>
+
+<div class="instruction">
+Pour chacune des propositions suivantes,
+<strong>une seule réponse est correcte</strong>.
+Cocher la case correspondante.
+</div>
+
+
+<div class="question">
+
+<div class="question-number">1)</div>
+
+<p>
+L'instruction
+<strong>B ← Alea(0,10) - 5</strong>
+permet d'affecter à B une valeur aléatoire de l'intervalle :
+</p>
+
+<div class="options">
+
+<label>
+<input type="radio" name="q1">
+[0..5]
+</label>
+
+<label>
+<input type="radio" name="q1">
+[5..10]
+</label>
+
+<label>
+<input type="radio" name="q1">
+[-5..5]
+</label>
+
+<label>
+<input type="radio" name="q1">
+[-5..10]
+</label>
+
+</div>
+
+</div>
+
+
+<div class="question">
+
+<div class="question-number">2)</div>
+
+<p>Soit la séquence suivante :</p>
+
+<pre><code>i ← 0
+
+{ A }
+
+Répéter
+
+    { B }
+
+    Ecrire(i)
+
+    { C }
+
+Jusqu'à (i mod 8 = 0)</code></pre>
+
+<p>
+Pour afficher successivement les valeurs
+<strong>2, 4, 6 et 8</strong>,
+l'instruction
+<strong>i ← i + 2</strong>
+doit être ajoutée dans l'emplacement :
+</p>
+
+<div class="options">
+
+<label>
+<input type="radio" name="q2">
+{ A }
+</label>
+
+<label>
+<input type="radio" name="q2">
+{ B }
+</label>
+
+<label>
+<input type="radio" name="q2">
+{ C }
+</label>
+
+</div>
+
+</div>
+
+
+<div class="question">
+
+<div class="question-number">3)</div>
+
+<p>Soit la séquence :</p>
+
+<pre><code>A ← 1
+B ← 1
+
+Répéter
+
+    "Traitement"
+
+    B ← A + 4
+
+Jusqu'à A = 10</code></pre>
+
+<p>
+Combien de fois s'exécute le bloc
+<strong>« Traitement »</strong> ?
+</p>
+
+<div class="options">
+
+<label>
+<input type="radio" name="q3">
+1 fois
+</label>
+
+<label>
+<input type="radio" name="q3">
+3 fois
+</label>
+
+<label>
+<input type="radio" name="q3">
+5 fois
+</label>
+
+<label>
+<input type="radio" name="q3">
+À l'infini
+</label>
+
+</div>
+
+</div>
+
+
+<div class="question">
+
+<div class="question-number">4)</div>
+
+<p>Soit la séquence :</p>
+
+<pre><code>Pour k de 0 à 4 Faire
+
+    Si k mod 2 = 0 Alors
+        T[k] ← T[k] div 2
+    Fin Si
+
+Fin Pour</code></pre>
+
+<p>Le rôle de ce bloc d'instructions est :</p>
+
+<div class="options">
+
+<label>
+<input type="radio" name="q4">
+Multiplier par 2 les éléments d'indice pair de T
+</label>
+
+<label>
+<input type="radio" name="q4">
+Diviser par 2 les éléments d'indice impair de T
+</label>
+
+<label>
+<input type="radio" name="q4">
+Multiplier par 2 les éléments d'indice impair de T
+</label>
+
+<label>
+<input type="radio" name="q4">
+Diviser par 2 les éléments d'indice pair de T
+</label>
+
+</div>
+
+</div>
+
+<div class="note">
+Les réponses sont volontairement laissées sans correction.
+La correction sera réalisée en classe.
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     EXERCICE 4
+===================================================== -->
+
+<section class="exercise" id="ex4">
+
+<h2>Exercice N°4 — Nombre heureux</h2>
+
+<div class="definition">
+
+Un <strong>nombre heureux</strong> est un entier positif qui,
+lorsqu'on additionne les carrés de chacun de ses chiffres,
+puis les carrés des chiffres de la somme obtenue,
+et ainsi de suite, permet d'obtenir un entier à un seul chiffre
+égal à <strong>1</strong>.
+
+</div>
+
+
+<div class="examples">
+
+<div class="example">
+
+<h3>Exemple 1 : 319</h3>
+
+<p>
+3² + 1² + 9² = 91<br>
+9² + 1² = 82<br>
+8² + 2² = 68<br>
+6² + 8² = 100<br>
+1² + 0² + 0² = 1
+</p>
+
+<p>
+On obtient un entier à un seul chiffre égal à 1 :
+<strong>319 est heureux.</strong>
+</p>
+
+</div>
+
+
+<div class="example">
+
+<h3>Exemple 2 : 85</h3>
+
+<p>
+8² + 5² = 89<br>
+8² + 9² = 145<br>
+1² + 4² + 5² = 42<br>
+4² + 2² = 20<br>
+2² + 0² = 4
+</p>
+
+<p>
+On obtient un entier à un seul chiffre différent de 1 :
+<strong>85 n'est pas heureux.</strong>
+</p>
+
+</div>
+
+</div>
+
+
+<h3>Travail demandé</h3>
+
+<p>
+Pour chacune des propositions suivantes,
+cocher <strong>V</strong> si elle est correcte
+ou <strong>F</strong> dans le cas contraire.
+</p>
+
+<p>
+La ou les suite(s) d'instructions permettant de calculer
+la somme <strong>S</strong> des carrés des chiffres
+d'un entier <strong>X</strong>, avec
+<strong>X ≥ 10</strong>, est (sont) :
+</p>
+
+
+<div class="proposition">
+
+<strong>Proposition 1</strong>
+
+<pre><code>S ← 0
+
+Répéter
+
+    S ← S + (X mod 10) * (X mod 10)
+
+    X ← X div 10
+
+Jusqu'à (X = 0)</code></pre>
+
+<div class="vf">
+<label>
+<input type="radio" name="p1"> V
+</label>
+
+<label>
+<input type="radio" name="p1"> F
+</label>
+</div>
+
+</div>
+
+
+<div class="proposition">
+
+<strong>Proposition 2</strong>
+
+<pre><code>ch ← Convch(X)
+
+S ← 0
+
+Pour i de 0 à long(ch) - 1 Faire
+
+    S ← Valeur(ch[i]) * Valeur(ch[i])
+
+Fin Pour</code></pre>
+
+<div class="vf">
+<label>
+<input type="radio" name="p2"> V
+</label>
+
+<label>
+<input type="radio" name="p2"> F
+</label>
+</div>
+
+</div>
+
+
+<div class="proposition">
+
+<strong>Proposition 3</strong>
+
+<pre><code>ch ← Convch(X)
+
+S ← Valeur(ch[0]) * Valeur(ch[0])
+
+Pour i de 1 à long(ch) - 1 Faire
+
+    S ← S + Valeur(ch[i]) * Valeur(ch[i])
+
+Fin Pour</code></pre>
+
+<div class="vf">
+<label>
+<input type="radio" name="p3"> V
+</label>
+
+<label>
+<input type="radio" name="p3"> F
+</label>
+</div>
+
+</div>
+
+
+<div class="proposition">
+
+<strong>Proposition 4</strong>
+
+<pre><code>S ← 0
+
+Tant que (X ≠ 0) Faire
+
+    S ← S + (X mod 10) * (X mod 10)
+
+    X ← X div 10
+
+Fin Tant que</code></pre>
+
+<div class="vf">
+<label>
+<input type="radio" name="p4"> V
+</label>
+
+<label>
+<input type="radio" name="p4"> F
+</label>
+</div>
+
+</div>
+
+
+<div class="note">
+Aucune correction n'est affichée sur cette page.
+Les réponses seront discutées et corrigées en classe.
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<p>3 SI — Algorithmique & Programmation</p>
+<p>Professeur : Hamda Elbahri</p>
+
+</footer>
+
+</body>
+</html>

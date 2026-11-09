@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Les matrices — 3 SI Algorithmique</title><style>
+:root{--blue:#163b65;--green:#2d8a68;--pale:#f4f7fb;--border:#d6e0ec}
+*{box-sizing:border-box}body{margin:0;background:var(--pale);font:16px/1.65 Arial,Helvetica,sans-serif;color:#243447}
+header{background:var(--blue);color:#fff;padding:20px 7%}.head{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}.head h1{font-size:1.3rem;margin:0}.head p{margin:0;opacity:.85}.head a{color:white;text-decoration:none}
+main{max-width:950px;margin:35px auto;padding:0 20px}.paper{background:#fff;border-radius:12px;padding:34px 40px;box-shadow:0 3px 16px #142c4311}h1,h2,h3{color:var(--blue);line-height:1.3}h1{font-size:2rem;border-bottom:2px solid #3478b8;padding-bottom:12px}h2{margin-top:38px;font-size:1.45rem}h3{font-size:1.09rem;margin-top:27px;color:#286a80}p{margin:12px 0}.note{background:#eaf4fb;border-left:4px solid #3478b8;padding:12px 15px;margin:15px 0}.algorithm{background:#f0f3f8;padding:15px 18px;overflow-x:auto;white-space:pre;line-height:1.55;font-family:Consolas,'Courier New',monospace;font-size:.9rem;border-left:3px solid #9bb1d0}.matrix{border-collapse:collapse;margin:14px auto;text-align:center}.matrix th{font-size:.8rem;font-weight:normal;padding:2px 8px}.matrix td{border:1px solid #333;min-width:41px;height:36px;padding:3px 7px}.matrix .highlight{background:#dbe9ff}.matrix .select{background:#d7eee5}.matrix .blank{color:transparent}.matrow{display:flex;flex-wrap:wrap;gap:24px;justify-content:center}.matrow>div{flex:1;min-width:240px}.matcaption{text-align:center;color:#526579;font-size:.9rem}.action{display:inline-block;background:var(--green);color:white;text-decoration:none;padding:10px 17px;border-radius:6px;margin:8px 8px 8px 0}.action:hover{background:#226b50}.toc{background:#f7f9fc;border:1px solid var(--border);padding:15px 23px;border-radius:8px}.toc a{color:#2469a2}.synthesis{border-collapse:collapse;width:100%}.synthesis td,.synthesis th{border:1px solid #c0cad7;padding:8px 12px;text-align:left}.synthesis th{background:#eaf3ff}footer{text-align:center;background:var(--blue);color:white;padding:20px;margin-top:40px}@media(max-width:600px){.paper{padding:20px 15px}.matrix td{min-width:30px;height:30px;padding:2px}h1{font-size:1.5rem}}@media print{header,footer,.actions{display:none}body{background:white}.paper{box-shadow:none}main{margin:0;padding:0}}
+</style></head><body>
+<header><div class="head"><div><h1>3 SI – Algorithmique &amp; Programmation</h1><p>Professeur : Hamda Elbahri</p></div><nav><a href="../index.html">Accueil</a> · <a href="../index.html#cours-disponible">Tous les cours</a></nav></div></header>
+<main><article class="paper"><h1>Les matrices (tableaux à deux dimensions)</h1><p><strong>3ème année – Sciences de l’Informatique</strong></p><div class="actions"><a class="action" href="../Cours_Matrices_3SI.pdf" target="_blank" rel="noopener">Consulter le cours en PDF</a></div>
+<nav class="toc" aria-label="Sommaire"><strong>Sommaire</strong><ol><li><a href="#notions">Notions fondamentales</a></li><li><a href="#parcours">Parcours et remplissage</a></li><li><a href="#traitements">Traitements fondamentaux</a></li><li><a href="#diagonales">Traitements sur les diagonales</a></li><li><a href="#lignes">Lignes et colonnes</a></li><li><a href="#applications">Applications</a></li><li><a href="#synthese">Synthèse</a></li></ol></nav>
+<h2 id="notions">I. Notions fondamentales</h2><h3>1. Définition</h3><p>Une <strong>matrice</strong> est une structure de données permettant de stocker des éléments de même type, organisés en lignes et en colonnes. Une matrice <strong>M</strong> de dimension <strong>L × C</strong> comporte L lignes et C colonnes. Chaque élément est repéré par deux indices <strong>M[i,j]</strong> : i indique la ligne et j la colonne.</p><p>Exemple : une matrice d’entiers de dimension 3 × 4 (indices commençant à 0).</p>
+<table class="matrix" aria-label="Matrice"><thead><tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th></tr></thead><tbody><tr><th>0</th><td>12</td><td>7</td><td>5</td><td>9</td></tr><tr><th>1</th><td>4</td><td class="highlight">18</td><td>6</td><td>2</td></tr><tr><th>2</th><td>15</td><td>8</td><td>3</td><td>11</td></tr></tbody></table>
+<p><strong>M[1,1] = 18</strong> ; les indices des lignes varient de 0 à 2, ceux des colonnes de 0 à 3.</p><h3>2. Matrice rectangulaire et matrice carrée</h3><p>Une matrice rectangulaire possède un nombre de lignes différent du nombre de colonnes. Une <strong>matrice carrée</strong> possède autant de lignes que de colonnes : une matrice carrée d’ordre n comporte n lignes et n colonnes.</p><h3>3. Les diagonales d’une matrice carrée</h3><p>La <strong>diagonale principale</strong> est constituée des cases vérifiant <strong>i = j</strong> : M[i,i]. La <strong>diagonale secondaire</strong> est constituée des cases vérifiant <strong>i + j = n − 1</strong> : M[i,n−1−i].</p>
+<div class="matrow"><div><p class="matcaption">Diagonale principale</p><table class="matrix" aria-label="Matrice"><thead><tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th></tr></thead><tbody><tr><th>0</th><td class="highlight">1</td><td></td><td></td><td></td></tr><tr><th>1</th><td></td><td class="highlight">2</td><td></td><td></td></tr><tr><th>2</th><td></td><td></td><td class="highlight">3</td><td></td></tr><tr><th>3</th><td></td><td></td><td></td><td class="highlight">4</td></tr></tbody></table></div><div><p class="matcaption">Diagonale secondaire</p><table class="matrix" aria-label="Matrice"><thead><tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th></tr></thead><tbody><tr><th>0</th><td></td><td></td><td></td><td class="highlight">4</td></tr><tr><th>1</th><td></td><td></td><td class="highlight">3</td><td></td></tr><tr><th>2</th><td></td><td class="highlight">2</td><td></td><td></td></tr><tr><th>3</th><td class="highlight">1</td><td></td><td></td><td></td></tr></tbody></table></div></div>
+<h3>4. Déclaration d’une matrice</h3><p>Exemple : déclarer une matrice d’entiers pouvant contenir au maximum 10 lignes et 10 colonnes.</p><pre class="algorithm">T.D.N.T
+    Mat = Tableau de 10 × 10 entiers</pre><p>L et C désignent les dimensions effectives de la matrice, avec des indices commençant à 0.</p>
+<h2 id="parcours">II. Parcours et remplissage</h2><p>Le parcours complet d’une matrice utilise généralement deux boucles imbriquées : une boucle sur les lignes, puis une autre sur les colonnes.</p>
+<section><h3>Activité 1 – Saisie des éléments</h3><p>Saisir les dimensions L et C (comprises entre 2 et 10), puis remplir la matrice au clavier.</p><pre class="algorithm">Répéter
+    Lire(L)
+Jusqu’à (2 ≤ L ≤ 10)
+Répéter
+    Lire(C)
+Jusqu’à (2 ≤ C ≤ 10)
+Pour i de 0 à L-1 Faire
+    Pour j de 0 à C-1 Faire
+        Lire(M[i,j])
+    FinPour
+FinPour</pre></section>
+<section><h3>Activité 2 – Remplissage aléatoire</h3><p>Remplir une matrice M de dimension L × C par des entiers aléatoires compris entre 1 et 100.</p><pre class="algorithm">Pour i de 0 à L-1 Faire
+    Pour j de 0 à C-1 Faire
+        M[i,j] ← Aléa(1,100)
+    FinPour
+FinPour</pre></section>
+<h2 id="traitements">III. Traitements fondamentaux</h2>
+<section><h3>Activité 3 – Somme des éléments</h3><p>Calculer et afficher la somme de tous les éléments d’une matrice M de dimension L × C.</p><pre class="algorithm">S ← 0
+Pour i de 0 à L-1 Faire
+    Pour j de 0 à C-1 Faire
+        S ← S + M[i,j]
+    FinPour
+FinPour
+Écrire(S)</pre></section>
+<section><h3>Activité 4 – Maximum d’une matrice</h3><p>Déterminer et afficher le plus grand élément d’une matrice M de dimension L × C.</p><pre class="algorithm">Max ← M[0,0]
+Pour i de 0 à L-1 Faire
+    Pour j de 0 à C-1 Faire
+        Si M[i,j] &gt; Max Alors
+            Max ← M[i,j]
+        FinSi
+    FinPour
+FinPour
+Écrire(Max)</pre><p class="note">À retenir : initialiser Max avec M[0,0], et non avec zéro, car tous les éléments peuvent être négatifs.</p></section>
+<section><h3>Activité 5 – Recherche d’un élément</h3><p>Vérifier si un entier X existe dans une matrice M de dimension L × C. Arrêter la recherche dès sa découverte.</p><pre class="algorithm">Trouve ← Faux
+i ← 0
+TantQue (i &lt; L) et (Trouve = Faux) Faire
+    j ← 0
+    TantQue (j &lt; C) et (Trouve = Faux) Faire
+        Si M[i,j] = X Alors
+            Trouve ← Vrai
+        Sinon
+            j ← j + 1
+        FinSi
+    FinTantQue
+    i ← i + 1
+FinTantQue
+Écrire(Trouve)</pre><p class="note">Une boucle TantQue convient ici, puisque le nombre d’itérations dépend de la position éventuelle de X.</p></section>
+<h2 id="diagonales">IV. Traitements sur les diagonales</h2><p>Les activités suivantes supposent que M est une matrice carrée d’ordre n.</p>
+<section><h3>Activité 6 – Trace d’une matrice</h3><p>La trace est la somme des éléments de la diagonale principale. Calculer et afficher la trace de M.</p><pre class="algorithm">S ← 0
+Pour i de 0 à n-1 Faire
+    S ← S + M[i,i]
+FinPour
+Écrire(S)</pre><p class="note">Exemple : pour les valeurs diagonales 4,2 ; 6 ; 8,7, la trace vaut 18,9.</p></section>
+<section><h3>Activité 7 – Somme de la diagonale secondaire</h3><p>Calculer la somme des éléments de la diagonale secondaire de M.</p><pre class="algorithm">S ← 0
+Pour i de 0 à n-1 Faire
+    S ← S + M[i,n-i-1]
+FinPour
+Écrire(S)</pre></section>
+<section><h3>Activité 8 – Somme des deux diagonales</h3><p>Calculer la somme des éléments appartenant à au moins une diagonale, sans compter deux fois une case commune.</p><pre class="algorithm">S ← 0
+Pour i de 0 à n-1 Faire
+    S ← S + M[i,i]
+    Si i ≠ n-1-i Alors
+        S ← S + M[i,n-1-i]
+    FinSi
+FinPour
+Écrire(S)</pre><p class="note">Pour un ordre impair, les deux diagonales se croisent dans une case centrale : il faut éviter de la compter deux fois.</p></section>
+<h2 id="lignes">V. Traitements sur les lignes et les colonnes</h2>
+<section><h3>Activité 9 – Première et dernière colonne</h3><p>Calculer la somme des éléments de la première et de la dernière colonne d’une matrice M de dimension L × C.</p><pre class="algorithm">S ← 0
+Pour i de 0 à L-1 Faire
+    S ← S + M[i,0] + M[i,C-1]
+FinPour
+Écrire(S)</pre></section>
+<section><h3>Activité 10 – Ligne de somme maximale</h3><p>Déterminer le numéro de la ligne ayant la somme la plus élevée dans M.</p><pre class="algorithm">Num ← 0
+Pour i de 0 à L-1 Faire
+    S ← 0
+    Pour j de 0 à C-1 Faire
+        S ← S + M[i,j]
+    FinPour
+    Si (i = 0) ou (S &gt; MaxS) Alors
+        MaxS ← S
+        Num ← i
+    FinSi
+FinPour
+Écrire(Num, MaxS)</pre></section>
+<h2 id="applications">VI. Applications : remplissages particuliers</h2><p>Dans les quatre exercices suivants, M est une matrice carrée d’ordre 5. Les cases laissées vides dans les figures ne sont pas concernées par le remplissage.</p>
+<h3>Application 1</h3><p>Triangle inférieur : remplir M[i,j] par j pour j ≤ i.</p><table class="matrix" aria-label="Matrice"><thead><tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody><tr><th>0</th><td class="highlight">0</td><td></td><td></td><td></td><td></td></tr><tr><th>1</th><td class="highlight">0</td><td class="highlight">1</td><td></td><td></td><td></td></tr><tr><th>2</th><td class="highlight">0</td><td class="highlight">1</td><td class="highlight">2</td><td></td><td></td></tr><tr><th>3</th><td class="highlight">0</td><td class="highlight">1</td><td class="highlight">2</td><td class="highlight">3</td><td></td></tr><tr><th>4</th><td class="highlight">0</td><td class="highlight">1</td><td class="highlight">2</td><td class="highlight">3</td><td class="highlight">4</td></tr></tbody></table>
+<h3>Application 2</h3><p>Triangle supérieur : remplir M[i,j] par j pour j ≥ i.</p><table class="matrix" aria-label="Matrice"><thead><tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody><tr><th>0</th><td class="highlight">0</td><td class="highlight">1</td><td class="highlight">2</td><td class="highlight">3</td><td class="highlight">4</td></tr><tr><th>1</th><td></td><td class="highlight">1</td><td class="highlight">2</td><td class="highlight">3</td><td class="highlight">4</td></tr><tr><th>2</th><td></td><td></td><td class="highlight">2</td><td class="highlight">3</td><td class="highlight">4</td></tr><tr><th>3</th><td></td><td></td><td></td><td class="highlight">3</td><td class="highlight">4</td></tr><tr><th>4</th><td></td><td></td><td></td><td></td><td class="highlight">4</td></tr></tbody></table>
+<h3>Application 3</h3><p>Triangle du côté gauche de la diagonale secondaire : i + j ≤ 4.</p><table class="matrix" aria-label="Matrice"><thead><tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody><tr><th>0</th><td class="highlight">0</td><td class="highlight">1</td><td class="highlight">2</td><td class="highlight">3</td><td class="highlight">4</td></tr><tr><th>1</th><td class="highlight">0</td><td class="highlight">1</td><td class="highlight">2</td><td class="highlight">3</td><td></td></tr><tr><th>2</th><td class="highlight">0</td><td class="highlight">1</td><td class="highlight">2</td><td></td><td></td></tr><tr><th>3</th><td class="highlight">0</td><td class="highlight">1</td><td></td><td></td><td></td></tr><tr><th>4</th><td class="highlight">0</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<h3>Application 4</h3><p>Triangle du côté droit de la diagonale secondaire : i + j ≥ 4.</p><table class="matrix" aria-label="Matrice"><thead><tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody><tr><th>0</th><td></td><td></td><td></td><td></td><td class="highlight">4</td></tr><tr><th>1</th><td></td><td></td><td></td><td class="highlight">3</td><td class="highlight">4</td></tr><tr><th>2</th><td></td><td></td><td class="highlight">2</td><td class="highlight">3</td><td class="highlight">4</td></tr><tr><th>3</th><td></td><td class="highlight">1</td><td class="highlight">2</td><td class="highlight">3</td><td class="highlight">4</td></tr><tr><th>4</th><td class="highlight">0</td><td class="highlight">1</td><td class="highlight">2</td><td class="highlight">3</td><td class="highlight">4</td></tr></tbody></table>
+<h3>Application complémentaire</h3><p>Remplir toute une matrice carrée avec 0 sur la diagonale principale, 1 au-dessous et 2 au-dessus.</p><table class="matrix" aria-label="Matrice"><thead><tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody><tr><th>0</th><td>0</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><th>1</th><td>1</td><td>0</td><td>2</td><td>2</td><td>2</td></tr><tr><th>2</th><td>1</td><td>1</td><td>0</td><td>2</td><td>2</td></tr><tr><th>3</th><td>1</td><td>1</td><td>1</td><td>0</td><td>2</td></tr><tr><th>4</th><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr></tbody></table>
+<h2 id="synthese">VII. Synthèse</h2><table class="synthesis"><thead><tr><th>Traitement</th><th>Indice ou principe</th></tr></thead><tbody><tr><td>Parcours complet</td><td>Deux boucles imbriquées</td></tr><tr><td>Diagonale principale</td><td>M[i,i]</td></tr><tr><td>Diagonale secondaire</td><td>M[i,n-1-i]</td></tr><tr><td>Première ligne</td><td>M[0,j]</td></tr><tr><td>Dernière ligne</td><td>M[L-1,j]</td></tr><tr><td>Première colonne</td><td>M[i,0]</td></tr><tr><td>Dernière colonne</td><td>M[i,C-1]</td></tr><tr><td>Maximum</td><td>Initialiser à M[0,0]</td></tr><tr><td>Recherche avec arrêt</td><td>Boucles TantQue + booléen</td></tr></tbody></table></article></main><footer>3 SI — Algorithmique &amp; Programmation<br>Professeur : Hamda Elbahri</footer></body></html>
